@@ -27,11 +27,23 @@
     "LICENSE"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "bun run clean && bun build ./src/index.ts --outdir ./dist --format esm --target node --external elysia && bunx tsc --project tsconfig.json --emitDeclarationOnly",
     "typecheck": "bunx tsc --noEmit -p tsconfig.json && bunx tsc --noEmit -p tsconfig.test.json",
-    "test": "bun test"
+    "test": "bun test",
+    "check": "bun run typecheck && bun run test && bun run build",
+    "release:prepare": "bun run check && npm publish --dry-run",
+    "release:version:patch": "npm version patch -m \"chore(release): v%s\"",
+    "release:version:minor": "npm version minor -m \"chore(release): v%s\"",
+    "release:version:major": "npm version major -m \"chore(release): v%s\"",
+    "release:publish": "npm publish",
+    "release:patch": "bun run release:prepare && bun run release:version:patch && bun run release:publish",
+    "release:minor": "bun run release:prepare && bun run release:version:minor && bun run release:publish",
+    "release:major": "bun run release:prepare && bun run release:version:major && bun run release:publish"
   },
   "peerDependencies": {
     "elysia": "^1.2.0"
