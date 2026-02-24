@@ -1,6 +1,6 @@
 {
   "name": "elysia-structured-logger",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Structured wide-event logging plugin for Elysia applications.",
   "type": "module",
   "license": "MIT",
