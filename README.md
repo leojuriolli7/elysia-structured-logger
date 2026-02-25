@@ -107,7 +107,7 @@ const app = new Elysia()
   });
 ```
 
-### 2. Correlate with OpenTelemetry without coupling the plugin to OTEL
+### 2. Correlate with OpenTelemetry
 
 ```ts
 import { trace } from "@opentelemetry/api";
